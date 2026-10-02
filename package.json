@@ -1,0 +1,18 @@
+{
+  "name": "fruit-routine-bangalore",
+  "version": "1.0.0",
+  "description": "Fruit Routine - Fresh Morning Mixed Fruit Bowl Subscription & Bulk Catering Delivery in Bangalore",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "fruit-routine",
+    "bangalore",
+    "fresh-fruit-bowl",
+    "subscriptions"
+  ],
+  "author": "Fruit Routine",
+  "license": "ISC"
+}

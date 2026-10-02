@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fruit Routine | 100% Fresh Mixed Fruit Bowls Delivered Every Morning</title>
+  <meta name="description" content="Fruit Routine delivers freshly cut, hygienically packed mixed fruit bowls every morning between 7:00 AM – 9:00 AM in Electronic City, Bommasandra & Chandapura, with bulk orders across Bangalore. 3-day trial only ₹199!">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <a href="#" class="brand-logo" aria-label="Fruit Routine Home">
+        <img src="assets/logo.png" alt="Fruit Routine Logo" class="brand-logo-img">
+      </a>
+
+      <nav class="nav-links" id="desktopNav">
+        <a href="#aboutBowl" class="nav-link">Our Fresh Bowl</a>
+        <a href="#pricing" class="nav-link">Subscription Plans</a>
+        <a href="#bulkOrders" class="nav-link highlight-link">
+          <i class="fa-solid fa-boxes-stacked"></i> Bulk Orders
+        </a>
+        <a href="#howItWorks" class="nav-link">How It Works</a>
+        <a href="#whyUs" class="nav-link">Why Fruit Routine</a>
+        <a href="#reviews" class="nav-link">Reviews</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="city-badge">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Electronic City & Bangalore</span>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="openSubscriptionModal('3-Day Trial')">
+          3-Day Trial ₹199
+        </button>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <a href="#aboutBowl" class="mobile-link">Our Fresh Bowl (100% Fresh)</a>
+      <a href="#pricing" class="mobile-link">Subscription Plans (Trial ₹199)</a>
+      <a href="#bulkOrders" class="mobile-link" style="color: var(--primary-green); font-weight: 700;">
+        <i class="fa-solid fa-boxes-stacked"></i> Bulk Orders & Catering
+      </a>
+      <a href="#howItWorks" class="mobile-link">How It Works</a>
+      <a href="#whyUs" class="mobile-link">Why Choose Us</a>
+      <a href="#reviews" class="mobile-link">Customer Reviews</a>
+      <a href="#dashboard" class="mobile-link">Subscriber Dashboard Demo</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+        <button class="btn btn-cta btn-block" onclick="openSubscriptionModal('3-Day Trial')">
+          Start 3-Day Trial (₹199 only)
+        </button>
+        <button class="btn btn-outline btn-block" onclick="openBulkOrderModal()">
+          <i class="fa-solid fa-phone"></i> Inquire Bulk Orders
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="decor-fruit decor-1">🍉</div>
+    <div class="decor-fruit decor-2">🍎</div>
+    <div class="decor-fruit decor-3">🥝</div>
+
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-pill-badge">
+          <span class="pulse-dot"></span>
+          <span>Daily Morning Delivery: Electronic City, Bommasandra & Chandapura</span>
+        </div>
+
+        <h1 class="hero-title">
+          100% Fresh Fruit Bowls at your doorstep, <span class="text-gradient">every morning.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Freshly cut. Hygienically packed. Delivered every morning between <strong>7:00 AM – 9:00 AM</strong>. No cutting, no mess, no hassle — <em>just open, eat & enjoy!</em>
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-cta btn-lg" onclick="openSubscriptionModal('3-Day Trial')">
+            <i class="fa-solid fa-bolt"></i> Start 3-Day Trial for <span style="text-decoration: line-through; opacity: 0.8; font-size: 0.9em; margin: 0 4px;">₹280</span> <strong>₹199 only</strong>
+          </button>
+          <button class="btn btn-outline btn-lg" onclick="openBulkOrderModal()">
+            <i class="fa-solid fa-boxes-packing"></i> Bulk Orders / Catering
+          </button>
+        </div>
+
+        <!-- Pincode Checker -->
+        <div class="pincode-checker-card">
+          <div class="pincode-title">
+            <i class="fa-solid fa-truck-fast" style="color: var(--primary-green);"></i>
+            <span>Check morning delivery in your locality</span>
+          </div>
+          <form class="pincode-form" id="pincodeForm" onsubmit="handlePincodeCheck(event)">
+            <div class="pincode-input-wrapper">
+              <i class="fa-solid fa-location-crosshairs pincode-icon"></i>
+              <input type="text" id="pincodeInput" class="pincode-input" placeholder="Enter Pincode (e.g. 560100 for Electronic City)" maxlength="6" pattern="[0-9]{6}" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">
+              Check
+            </button>
+          </form>
+          <div id="pincodeResult" class="pincode-result"></div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Showcase -->
+      <div class="hero-visual">
+        <div class="hero-main-card">
+          <div class="hero-img-wrap">
+            <img src="assets/fruit-bowl-pack.jpg" alt="Fruit Routine Fresh Mixed Fruit Bowl" class="hero-img" loading="eager">
+          </div>
+
+          <div class="floating-badge badge-top-left">
+            <div class="badge-icon badge-green">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div>
+              <div class="badge-text-title">100% Fresh Fruits</div>
+              <div class="badge-text-sub">No Preservatives Added</div>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-bottom-right">
+            <div class="badge-icon badge-orange">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div>
+              <div class="badge-text-title">7:00 AM – 9:00 AM</div>
+              <div class="badge-text-sub">On-Time Morning Drop</div>
+            </div>
+          </div>
+
+          <div class="floating-badge badge-middle-right">
+            <div class="badge-icon badge-green">
+              <i class="fa-solid fa-tag"></i>
+            </div>
+            <div>
+              <div class="badge-text-title">3-Day Trial: ₹199</div>
+              <div class="badge-text-sub">Just ₹66 / Day</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VALUE PROPOSITION RIBBON
+       ========================================================================== -->
+  <div class="convenience-ribbon">
+    <div class="container convenience-grid">
+      <div class="conv-item">
+        <div class="conv-icon">🌱</div>
+        <div>
+          <div class="conv-title">NO CUTTING</div>
+          <div class="conv-sub">Zero morning prep time</div>
+        </div>
+      </div>
+      <div class="conv-item">
+        <div class="conv-icon">🥗</div>
+        <div>
+          <div class="conv-title">NO MESS</div>
+          <div class="conv-sub">No peelings or dirty bowls</div>
+        </div>
+      </div>
+      <div class="conv-item">
+        <div class="conv-icon">😊</div>
+        <div>
+          <div class="conv-title">NO HASSLE</div>
+          <div class="conv-sub">Just open, eat & enjoy!</div>
+        </div>
+      </div>
+      <div class="conv-item">
+        <div class="conv-icon">🛵</div>
+        <div>
+          <div class="conv-title">7:00 AM – 9:00 AM</div>
+          <div class="conv-sub">Fresh on-time daily drop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SUBSCRIPTION PLANS & PRICING (EXACT OFFICIAL FLYER PRICING)
+       ========================================================================== -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Healthy Morning Habit</span>
+        <h2 class="section-title">Daily Subscription Plans</h2>
+        <p class="section-desc">Freshly cut, hygienically packed mixed fruit bowls delivered to your doorstep every morning.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- 3 DAYS TRIAL (DISCOUNTED TO ₹199) -->
+        <div class="pricing-card popular" style="border-color: var(--cta-orange);">
+          <div class="popular-badge" style="background: linear-gradient(135deg, var(--cta-orange), #FF6B6B);">
+            🔥 SPECIAL TRIAL OFFER
+          </div>
+          <h3 class="plan-type">3 DAYS TRIAL</h3>
+          <p class="plan-desc"><em>"Try it. Love it. Start your healthy routine!"</em></p>
+          
+          <div class="plan-price-wrap">
+            <div class="plan-price">
+              <span class="price-curr">₹</span>
+              <span class="price-num" id="trialPrice">199</span>
+              <span class="price-sub">/ 3 days</span>
+              <span class="strikethrough-price">₹280</span>
+            </div>
+            <div class="per-day-badge" style="background: #FFE8D6; color: #D96800;">
+              <i class="fa-solid fa-tag"></i> ₹66 PER DAY • SAVE 29%
+            </div>
+          </div>
+
+          <div class="plan-features">
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>3 Fresh Gourmet Mixed Fruit Bowls</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Morning delivery between 7:00 AM – 9:00 AM</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>100% Fresh Fruits • Sourced daily</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>No preservatives or artificial sweeteners</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Prepared in clean & sanitized environment</span>
+            </div>
+          </div>
+
+          <button class="btn btn-cta btn-block btn-lg" onclick="openSubscriptionModal('3-Day Trial')">
+            <i class="fa-solid fa-bolt"></i> Start 3-Day Trial (₹199)
+          </button>
+        </div>
+
+        <!-- 7 DAYS PLAN -->
+        <div class="pricing-card">
+          <h3 class="plan-type">7 DAYS PLAN</h3>
+          <p class="plan-desc"><em>"Stay consistent. Stay healthy!"</em></p>
+          
+          <div class="plan-price-wrap">
+            <div class="plan-price">
+              <span class="price-curr">₹</span>
+              <span class="price-num" id="weeklyPrice">649</span>
+              <span class="price-sub">/ 7 days</span>
+            </div>
+            <div class="per-day-badge">
+              <i class="fa-solid fa-leaf"></i> ₹92 PER DAY
+            </div>
+          </div>
+
+          <div class="plan-features">
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>7 Fresh Gourmet Mixed Fruit Bowls</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>On-time morning delivery (7:00 AM – 9:00 AM)</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Pause / Skip days anytime via WhatsApp</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>100% Fresh Fruits • Rich in natural vitamins</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Hygienically sealed tamper-proof packaging</span>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block" onclick="openSubscriptionModal('7-Day Plan')">
+            Subscribe 7 Days (₹649)
+          </button>
+        </div>
+
+        <!-- 30 DAYS PLAN -->
+        <div class="pricing-card">
+          <h3 class="plan-type">30 DAYS PLAN</h3>
+          <p class="plan-desc"><em>"Make fruits a routine, not a choice!"</em></p>
+          
+          <div class="plan-price-wrap">
+            <div class="plan-price">
+              <span class="price-curr">₹</span>
+              <span class="price-num" id="monthlyPrice">2699</span>
+              <span class="price-sub">/ 30 days</span>
+            </div>
+            <div class="per-day-badge" style="background: #D1E7DD; color: #0F5132;">
+              <i class="fa-solid fa-crown"></i> ₹90 PER DAY • BEST VALUE
+            </div>
+          </div>
+
+          <div class="plan-features">
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>30 Fresh Gourmet Mixed Fruit Bowls</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Priority morning delivery (7:00 AM – 9:00 AM)</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Unlimited pause days with full credit carry-forward</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>VIP WhatsApp concierge support</span>
+            </div>
+            <div class="feature-item">
+              <i class="fa-solid fa-check feature-icon"></i>
+              <span>Maximum savings for full daily health vitality</span>
+            </div>
+          </div>
+
+          <button class="btn btn-outline btn-block" onclick="openSubscriptionModal('30-Day Plan')">
+            Subscribe 30 Days (₹2,699)
+          </button>
+        </div>
+      </div>
+
+      <!-- Flyer Preview Banner Strip -->
+      <div style="margin-top: 40px; text-align: center;">
+        <div style="display: inline-flex; align-items: center; gap: 12px; background: #FFFFFF; padding: 12px 24px; border-radius: var(--radius-full); border: 1.5px solid var(--accent-green); box-shadow: var(--shadow-sm);">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem; color: #25D366;"></i>
+          <span style="font-weight: 700; font-size: 0.95rem;">Prefer ordering directly via WhatsApp?</span>
+          <a href="https://wa.me/919480020516?text=Hi%20Fruit%20Routine!%20I%20want%20to%20order%20the%203-Day%20Trial%20Plan%20for%20Rs.199." target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+            Chat on 9480020516
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PRODUCT SPOTLIGHT: 1-SKU FRESH MIXED FRUIT BOWL
+       ========================================================================== -->
+  <section class="about-bowl-section" id="aboutBowl">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Pure Nutrition</span>
+        <h2 class="section-title">Our Signature Fresh Mixed Fruit Bowl</h2>
+        <p class="section-desc">100% fresh fruits, cut every morning and hygienically packed. No cutting, no mess, no hassle.</p>
+      </div>
+
+      <div class="product-spotlight-card">
+        <div class="product-spotlight-grid">
+          <div class="product-spotlight-media">
+            <img src="assets/fruit-bowl-pack.jpg" alt="Fruit Routine Fresh Mixed Fruit Bowl" class="spotlight-img">
+            <div class="sku-badge-pill">
+              <i class="fa-solid fa-award"></i> 1 Standard Gourmet SKU • Freshly Cut Daily
+            </div>
+          </div>
+
+          <div class="product-spotlight-content">
+            <div class="sku-tag">FRESH. HEALTHY. DAILY.</div>
+            <h3 class="spotlight-title">Hand-Cut Daily Mixed Fruit Bowl</h3>
+            <p class="spotlight-text">
+              Every bowl is prepared in a clean and sanitized environment at 5:00 AM using farm-fresh fruits sourced daily from trusted suppliers. Sealed in a transparent hygienic container to preserve freshness and natural crunch.
+            </p>
+
+            <div class="spotlight-ingredients-box">
+              <h4 style="font-size: 0.95rem; margin-bottom: 12px; color: var(--primary-green-dark);">
+                <i class="fa-solid fa-seedling"></i> What’s Inside Every Morning Bowl:
+              </h4>
+              <div class="ingredient-grid-badges">
+                <div class="ing-badge"><span class="ing-dot">🍉</span> Crisp Sweet Watermelon</div>
+                <div class="ing-badge"><span class="ing-dot">🍎</span> Fresh Gala Apples</div>
+                <div class="ing-badge"><span class="ing-dot">🍇</span> Pomegranate Pearls</div>
+                <div class="ing-badge"><span class="ing-dot">🥝</span> Golden Kiwi Dices</div>
+                <div class="ing-badge"><span class="ing-dot">🍍</span> Sweet Pineapple</div>
+                <div class="ing-badge"><span class="ing-dot">🍈</span> Muskmelon & Papaya</div>
+              </div>
+            </div>
+
+            <!-- Key Quality Highlights -->
+            <div class="sku-features-row">
+              <div class="sku-feat-item">
+                <i class="fa-solid fa-leaf" style="color: var(--primary-green);"></i>
+                <span>100% Fresh Fruits</span>
+              </div>
+              <div class="sku-feat-item">
+                <i class="fa-solid fa-ban" style="color: #D32F2F;"></i>
+                <span>No Preservatives</span>
+              </div>
+              <div class="sku-feat-item">
+                <i class="fa-solid fa-heart-pulse" style="color: var(--cta-orange);"></i>
+                <span>Rich in Nutrients</span>
+              </div>
+              <div class="sku-feat-item">
+                <i class="fa-solid fa-shield-virus" style="color: var(--primary-green);"></i>
+                <span>Hygienically Packed</span>
+              </div>
+            </div>
+
+            <div class="spotlight-actions">
+              <button class="btn btn-cta btn-lg" onclick="openSubscriptionModal('3-Day Trial')">
+                <i class="fa-solid fa-bolt"></i> Try 3-Day Trial for ₹199
+              </button>
+              <button class="btn btn-secondary btn-lg" onclick="openBulkOrderModal()">
+                <i class="fa-solid fa-boxes-stacked"></i> Order Bulk for Events
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       BULK ORDERS & CATERING SECTION
+       ========================================================================== -->
+  <section class="bulk-orders-section" id="bulkOrders">
+    <div class="container">
+      <div class="bulk-banner-container">
+        <div class="bulk-banner-grid">
+          <div class="bulk-banner-info">
+            <div class="bulk-pill-badge">
+              <i class="fa-solid fa-bullhorn"></i> Corporate & Event Catering
+            </div>
+            <h2 class="bulk-title">We Take <span class="text-gradient">Bulk Orders!</span></h2>
+            <p class="bulk-subtitle">
+              For Office Functions, Home Functions, and All Other Occasions across <strong>All Over Bangalore</strong>! Freshness in every bowl, happiness in every bite.
+            </p>
+
+            <div class="bulk-occasions-grid">
+              <div class="occasion-card">
+                <div class="occasion-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <div>
+                  <h4 class="occasion-title">Office Functions</h4>
+                  <p class="occasion-desc">Meetings, Seminars, Workshops, Corporate Events & More.</p>
+                </div>
+              </div>
+
+              <div class="occasion-card">
+                <div class="occasion-icon"><i class="fa-solid fa-house-chimney-user"></i></div>
+                <div>
+                  <h4 class="occasion-title">Home Functions</h4>
+                  <p class="occasion-desc">Parties, Get-togethers, Festivals, Poojas, House Warming & More.</p>
+                </div>
+              </div>
+
+              <div class="occasion-card">
+                <div class="occasion-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                <div>
+                  <h4 class="occasion-title">Special Occasions</h4>
+                  <p class="occasion-desc">Birthdays, Anniversaries, Celebrations & Many More.</p>
+                </div>
+              </div>
+
+              <div class="occasion-card">
+                <div class="occasion-icon"><i class="fa-solid fa-sparkles"></i></div>
+                <div>
+                  <h4 class="occasion-title">All Other Functions</h4>
+                  <p class="occasion-desc">Any Occasion, large or small — We've Got You Covered!</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bulk-contact-strip">
+              <a href="tel:9480020516" class="bulk-contact-link">
+                <div class="contact-pill-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-light);">Call or WhatsApp</div>
+                  <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">9480020516</div>
+                </div>
+              </a>
+
+              <a href="mailto:info.fruitroutine@gmail.com" class="bulk-contact-link">
+                <div class="contact-pill-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <div style="font-size: 0.75rem; color: var(--text-light);">Drop Us An Email</div>
+                  <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">info.fruitroutine@gmail.com</div>
+                </div>
+              </a>
+            </div>
+
+            <div style="margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap;">
+              <button class="btn btn-cta btn-lg" onclick="openBulkOrderModal()">
+                <i class="fa-brands fa-whatsapp"></i> Inquire for Bulk Orders Now
+              </button>
+              <a href="https://instagram.com/fruitroutine" target="_blank" rel="noopener" class="btn btn-outline btn-lg">
+                <i class="fa-brands fa-instagram"></i> @fruitroutine
+              </a>
+            </div>
+          </div>
+
+          <div class="bulk-banner-visual">
+            <img src="assets/bulk-orders-banner.jpg" alt="Fruit Routine Bulk Orders in Bangalore" class="bulk-promo-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOW IT WORKS SECTION
+       ========================================================================== -->
+  <section class="how-section" id="howItWorks">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Simple & Effortless</span>
+        <h2 class="section-title">How Fruit Routine Works</h2>
+        <p class="section-desc">We handle the sourcing, sanitized washing, precise cutting, and early morning drop so you can start each day energized.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-icon-wrap"><i class="fa-solid fa-sliders"></i></div>
+          <h3 class="step-title">Choose Your Subscription</h3>
+          <p class="step-desc">Pick 3 Days Trial (₹199), 7 Days (₹649), or 30 Days (₹2,699). Pause or skip anytime before 9:00 PM.</p>
+          <div class="step-time-badge"><i class="fa-regular fa-clock"></i> Takes 2 minutes</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-icon-wrap"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3 class="step-title">We Cut & Pack Fresh at 5 AM</h3>
+          <p class="step-desc">100% fresh fruits, sanitized in clean cleanrooms, and sealed in tamper-proof chilled bowls with zero preservatives.</p>
+          <div class="step-time-badge"><i class="fa-solid fa-shield-virus"></i> Hygienically Packed</div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-icon-wrap"><i class="fa-solid fa-bell-concierge"></i></div>
+          <h3 class="step-title">Delivered 7:00 AM – 9:00 AM</h3>
+          <p class="step-desc">Our neighborhood fleet delivers quietly to your doorstep every morning with zero disturbance.</p>
+          <div class="step-time-badge"><i class="fa-solid fa-door-open"></i> Contactless doorstep drop</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       WHY CHOOSE US SECTION
+       ========================================================================== -->
+  <section class="why-section" id="whyUs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">The Fruit Routine Standard</span>
+        <h2 class="section-title">Why Customers Choose Fruit Routine</h2>
+        <p class="section-desc">We make healthy eating an effortless, delicious daily habit.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon-box"><i class="fa-solid fa-seedling"></i></div>
+          <h3 class="why-title">100% Fresh Daily Fruits</h3>
+          <p class="why-desc">Sourced daily from trusted suppliers and prepared at 5:00 AM every morning. Zero stockpiling.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon-box"><i class="fa-solid fa-hand-sparkles"></i></div>
+          <h3 class="why-title">Hygienically Packed</h3>
+          <p class="why-desc">Prepared in a sanitized, food-grade environment and sealed in tamper-proof containers.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon-box"><i class="fa-solid fa-clock"></i></div>
+          <h3 class="why-title">7:00 AM – 9:00 AM Delivery</h3>
+          <p class="why-desc">On-time morning doorstep drops across Electronic City, Bommasandra, Chandapura, and Bangalore.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon-box"><i class="fa-solid fa-ban"></i></div>
+          <h3 class="why-title">No Preservatives Added</h3>
+          <p class="why-desc">Pure, unadulterated fruit nutrition. Zero artificial syrups, sugar, or chemical additives.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon-box"><i class="fa-solid fa-pause"></i></div>
+          <h3 class="why-title">Effortless Pause & Skip</h3>
+          <p class="why-desc">Traveling or working late? Simply text us on WhatsApp before 9:00 PM and your balance extends.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon-box"><i class="fa-solid fa-boxes-packing"></i></div>
+          <h3 class="why-title">Bulk Orders & Event Catering</h3>
+          <p class="why-desc">Custom fruit cups and trays for offices, family functions, poojas, and birthdays all over Bangalore.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CUSTOMER REVIEWS CAROUSEL
+       ========================================================================== -->
+  <section class="reviews-section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Customer Love</span>
+        <h2 class="section-title">Loved by Bangalore Morning Routines</h2>
+        <p class="section-desc">See how Fruit Routine transformed daily breakfast habits.</p>
+      </div>
+
+      <div class="carousel-container">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="reviewTrack">
+            <!-- Review 1 -->
+            <div class="review-slide">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-quote">"The 3-Day trial for ₹199 was an absolute steal! The fruits are super crisp, chilled, and neatly cut with pomegranate, kiwi, and watermelon. I immediately renewed for the 30-day plan."</p>
+              <div class="reviewer-meta">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Ananya Sharma" class="reviewer-avatar">
+                <div class="reviewer-info">
+                  <div class="reviewer-name">Ananya Sharma</div>
+                  <div class="reviewer-sub-info">
+                    <span>Electronic City Phase 1</span> • <span class="verified-tag"><i class="fa-solid fa-circle-check"></i> 30-Day Subscriber</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-slide">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-quote">"We ordered 80 fruit bowls for our quarterly office tech seminar in Electronic City. Delivered exactly at 8:00 AM in chilled packaging. Everyone in the team loved the hygiene and fruit variety!"</p>
+              <div class="reviewer-meta">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Rohan Verma" class="reviewer-avatar">
+                <div class="reviewer-info">
+                  <div class="reviewer-name">Rohan Verma (HR Lead)</div>
+                  <div class="reviewer-sub-info">
+                    <span>Bangalore</span> • <span class="verified-tag"><i class="fa-solid fa-circle-check"></i> Corporate Bulk Client</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-slide">
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-quote">"No cutting, no mess, no hassle — that slogan is 100% accurate! Waking up to fresh fruits by 7:30 AM has solved my breakfast rush. 10/10 recommended."</p>
+              <div class="reviewer-meta">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80" alt="Pooja Nair" class="reviewer-avatar">
+                <div class="reviewer-info">
+                  <div class="reviewer-name">Pooja Nair</div>
+                  <div class="reviewer-sub-info">
+                    <span>Bommasandra</span> • <span class="verified-tag"><i class="fa-solid fa-circle-check"></i> 7-Day Plan Subscriber</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-arrow" id="prevReviewBtn" onclick="prevReview()" aria-label="Previous review">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="carousel-dots" id="carouselDots">
+            <span class="carousel-dot active" onclick="goToReview(0)"></span>
+            <span class="carousel-dot" onclick="goToReview(1)"></span>
+            <span class="carousel-dot" onclick="goToReview(2)"></span>
+          </div>
+          <button class="carousel-arrow" id="nextReviewBtn" onclick="nextReview()" aria-label="Next review">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CUSTOMER DASHBOARD MOCKUP
+       ========================================================================== -->
+  <section class="dashboard-section" id="dashboard">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Total Flexibility & Control</span>
+        <h2 class="section-title">Subscriber Self-Serve Portal Demo</h2>
+        <p class="section-desc">Experience how effortless it is to manage your Fruit Routine morning deliveries.</p>
+      </div>
+
+      <div class="dashboard-preview-card">
+        <div class="dashboard-topbar">
+          <div class="dash-user-info">
+            <div class="dash-avatar">FR</div>
+            <div>
+              <div class="dash-name">Ananya Sharma</div>
+              <div class="dash-sub-status"><i class="fa-solid fa-circle" style="font-size: 8px; color: #43A047;"></i> 7-Day Plan Active (3 of 7 Delivered)</div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="showDashboardToast('Subscription renewed successfully!')">
+            <i class="fa-solid fa-rotate-right"></i> Quick Renew
+          </button>
+        </div>
+
+        <div class="dash-controls">
+          <div class="dash-grid">
+            <!-- Left: Today's Delivery Tracker -->
+            <div class="dash-status-box">
+              <div class="dash-status-header">
+                <div>
+                  <h4 style="font-size: 1rem; margin-bottom: 2px;">Tomorrow's Morning Delivery</h4>
+                  <div style="font-size: 0.85rem; color: var(--text-muted);">Fresh Mixed Fruit Bowl • Friday Drop</div>
+                </div>
+                <span class="status-badge-active">
+                  <i class="fa-solid fa-truck"></i> Scheduled 7:30 AM
+                </span>
+              </div>
+
+              <!-- Delivery Status Timeline -->
+              <div class="delivery-timeline">
+                <div class="timeline-bar">
+                  <div class="timeline-progress"></div>
+                </div>
+                <div class="timeline-step completed">
+                  <div class="timeline-node"><i class="fa-solid fa-check"></i></div>
+                  <div style="font-size: 0.72rem; font-weight: 700;">Harvested</div>
+                </div>
+                <div class="timeline-step completed">
+                  <div class="timeline-node"><i class="fa-solid fa-check"></i></div>
+                  <div style="font-size: 0.72rem; font-weight: 700;">Sanitized</div>
+                </div>
+                <div class="timeline-step active">
+                  <div class="timeline-node"><i class="fa-solid fa-knife-kitchen"></i></div>
+                  <div style="font-size: 0.72rem; font-weight: 700; color: var(--cta-orange);">5 AM Cut</div>
+                </div>
+                <div class="timeline-step">
+                  <div class="timeline-node"><i class="fa-solid fa-house"></i></div>
+                  <div style="font-size: 0.72rem; font-weight: 700;">7 AM Drop</div>
+                </div>
+              </div>
+
+              <div style="background: #FFFFFF; border-radius: 8px; padding: 12px; font-size: 0.82rem; border: 1px solid var(--border-light); margin-top: 15px;">
+                <strong>📍 Delivery Address:</strong> Flat 302, Concorde Silicon Valley, Electronic City Phase 1, Bengaluru (560100)
+              </div>
+            </div>
+
+            <!-- Right: Interactive Quick Actions -->
+            <div class="dash-actions-grid">
+              <button class="dash-action-card" onclick="handleDashboardAction('skip')">
+                <div class="dash-action-icon" style="color: var(--cta-orange);"><i class="fa-regular fa-calendar-xmark"></i></div>
+                <div class="dash-action-title">Skip Tomorrow</div>
+                <div class="dash-action-desc">Carry forward bowl credit to next week</div>
+              </button>
+
+              <button class="dash-action-card" onclick="handleDashboardAction('pause')">
+                <div class="dash-action-icon" style="color: #3B82F6;"><i class="fa-solid fa-circle-pause"></i></div>
+                <div class="dash-action-title">Pause Vacation</div>
+                <div class="dash-action-desc">Freeze delivery for custom dates</div>
+              </button>
+
+              <button class="dash-action-card" onclick="handleDashboardAction('address')">
+                <div class="dash-action-icon" style="color: var(--primary-green);"><i class="fa-solid fa-map-location-dot"></i></div>
+                <div class="dash-action-title">Change Address</div>
+                <div class="dash-action-desc">Update door number or gate instructions</div>
+              </button>
+
+              <button class="dash-action-card" onclick="openBulkOrderModal()">
+                <div class="dash-action-icon" style="color: #8B5CF6;"><i class="fa-solid fa-boxes-packing"></i></div>
+                <div class="dash-action-title">Bulk Order</div>
+                <div class="dash-action-desc">Order for home function or office</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="dash-toast" id="dashToast">
+            <span id="dashToastMsg">Action completed successfully!</span>
+            <i class="fa-solid fa-xmark" style="cursor: pointer;" onclick="document.getElementById('dashToast').classList.remove('show')"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FAQ ACCORDION SECTION
+       ========================================================================== -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Everything you need to know about Fruit Routine plans, delivery hours, and bulk catering.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- FAQ 1 -->
+        <div class="faq-item active">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What is the 3-Day Trial Plan and how much does it cost?</span>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <p>Our 3-Day Trial Plan lets you experience Fruit Routine’s freshness and punctuality for <strong>just ₹199 only</strong> (discounted from ₹280 — just ₹66 per day!). It includes 3 freshly cut mixed fruit bowls delivered to your doorstep between 7:00 AM – 9:00 AM.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>What are the morning delivery timings?</span>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <p>Our morning delivery fleet delivers between <strong>7:00 AM – 9:00 AM</strong> every morning so you can enjoy breakfast fresh and hassle-free.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Which areas do you deliver daily subscriptions to?</span>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <p>We provide daily morning doorstep deliveries in <strong>Electronic City, Bommasandra & Chandapura</strong>. For <strong>Bulk Orders & Catering</strong>, we deliver across <strong>All Over Bangalore</strong>.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I pause or skip a delivery day?</span>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <p>Simply message us on WhatsApp at <strong>9480020516</strong> before 9:00 PM the previous evening. Your skipped day credit never expires and automatically extends your plan validity.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I place a Bulk Order for an office or family event?</span>
+            <div class="faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+          </button>
+          <div class="faq-answer">
+            <p>Click the <strong>Bulk Orders</strong> button on our website, or call / WhatsApp us directly at <strong>9480020516</strong>. We cater for meetings, poojas, birthdays, weddings, and seminars all over Bangalore.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER SECTION
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-title">
+            <img src="assets/logo.png" alt="Fruit Routine" style="height: 48px; background: #FFFFFF; border-radius: 8px; padding: 4px 10px;">
+          </div>
+          <p class="footer-desc">
+            <strong>FRESH. HEALTHY. DAILY.</strong><br>
+            Freshly cut. Hygienically packed. Delivered every morning between 7:00 AM – 9:00 AM.
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <span class="city-badge" style="background: rgba(255,255,255,0.1); color: #FFFFFF; border-color: rgba(255,255,255,0.2);">
+              <i class="fa-solid fa-check"></i> 100% Fresh • No Preservatives
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Subscription Plans</h4>
+          <ul class="footer-links">
+            <li><a href="#pricing">3 Days Trial (₹199 only)</a></li>
+            <li><a href="#pricing">7 Days Plan (₹649)</a></li>
+            <li><a href="#pricing">30 Days Plan (₹2699)</a></li>
+            <li><a href="#aboutBowl">Our Signature Fresh Bowl</a></li>
+            <li><a href="#faq">Delivery FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Bulk Orders Bangalore</h4>
+          <ul class="footer-links">
+            <li><a href="#bulkOrders">Office Meetings & Seminars</a></li>
+            <li><a href="#bulkOrders">Home Parties & Poojas</a></li>
+            <li><a href="#bulkOrders">Birthdays & Anniversaries</a></li>
+            <li><a href="#bulkOrders">Corporate Daily Catering</a></li>
+            <li><a href="#bulkOrders">All Bangalore Locations</a></li>
+            <li><a href="admin.html" style="color: var(--accent-green); font-weight: 700;"><i class="fa-solid fa-lock"></i> Operations & Admin Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Contact & Ordering</h4>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-phone" style="color: var(--accent-green); margin-top: 4px;"></i>
+            <a href="tel:9480020516" style="color: #FFFFFF; font-weight: 700;">9480020516 (Call / WhatsApp)</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-envelope" style="color: var(--accent-green); margin-top: 4px;"></i>
+            <a href="mailto:info.fruitroutine@gmail.com" style="color: #9CA3AF;">info.fruitroutine@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-brands fa-instagram" style="color: var(--accent-green); margin-top: 4px;"></i>
+            <a href="https://instagram.com/fruitroutine" target="_blank" rel="noopener" style="color: #9CA3AF;">@fruitroutine</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot" style="color: var(--accent-green); margin-top: 4px;"></i>
+            <span>Electronic City, Bommasandra & Chandapura</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Fruit Routine. All rights reserved. Fresh. Healthy. Daily.</div>
+        <div class="footer-socials">
+          <a href="https://instagram.com/fruitroutine" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/919480020516?text=Hi%20Fruit%20Routine!%20I%20want%20to%20order%20the%203-Day%20Trial%20for%20Rs.199." target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="tel:9480020516" class="social-btn" aria-label="Call Us"><i class="fa-solid fa-phone"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       STICKY BOTTOM MOBILE BAR & FLOATING WHATSAPP BUTTON
+       ========================================================================== -->
+  <div class="mobile-sticky-bar">
+    <div>
+      <div style="font-size: 0.72rem; color: var(--text-muted);">Special Trial Offer (<s>₹280</s>)</div>
+      <div style="font-weight: 800; color: var(--primary-green-dark); font-size: 1.05rem;">3-Day Trial: ₹199</div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button class="btn btn-outline btn-sm" onclick="openBulkOrderModal()">
+        Bulk
+      </button>
+      <button class="btn btn-cta btn-sm" onclick="openSubscriptionModal('3-Day Trial')">
+        Order ₹199
+      </button>
+    </div>
+  </div>
+
+  <a href="https://wa.me/919480020516?text=Hi%20Fruit%20Routine!%20I%20want%20to%20order%20the%203-Day%20Trial%20for%20Rs.199." target="_blank" rel="noopener" class="floating-whatsapp-btn" aria-label="Chat with Fruit Routine on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ==========================================================================
+       MODAL 1: 3-STEP SUBSCRIPTION SIGNUP FLOW WIZARD
+       ========================================================================== -->
+  <div class="modal-overlay" id="subscriptionModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="assets/logo.png" alt="Fruit Routine" style="height: 32px; border-radius: 6px;">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Subscribe to Fruit Routine</h3>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Fresh Mixed Fruit Bowl Delivery (7 AM – 9 AM)</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeSubscriptionModal()" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Stepper indicator -->
+      <div class="wizard-stepper">
+        <div class="wizard-step-node active" id="stepNode1">
+          <div class="wizard-step-num">1</div>
+          <span>Plan & Price</span>
+        </div>
+        <div class="wizard-step-node" id="stepNode2">
+          <div class="wizard-step-num">2</div>
+          <span>Delivery Details</span>
+        </div>
+        <div class="wizard-step-node" id="stepNode3">
+          <div class="wizard-step-num">3</div>
+          <span>Payment</span>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <form id="subscriptionWizardForm" onsubmit="event.preventDefault();">
+          <!-- STEP 1: Plan Selection -->
+          <div class="wizard-tab-content active" id="wizardStep1">
+            <div style="background: var(--bg-section-light); padding: 12px 16px; border-radius: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--accent-green);">
+              <img src="assets/fruit-bowl-pack.jpg" alt="Fruit Bowl" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;">
+              <div>
+                <div style="font-weight: 800; font-size: 0.95rem; color: var(--primary-green-dark);">100% Fresh Mixed Fruit Bowl</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">Freshly Cut • Zero Preservatives • Delivered 7 AM – 9 AM</div>
+              </div>
+            </div>
+
+            <h4 style="font-size: 1rem; margin-bottom: 14px;">Select Your Subscription Plan</h4>
+            <div class="plan-select-grid">
+              <!-- 3 Days Trial (₹199 only) -->
+              <label class="plan-radio-card selected" id="planCardTrial">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <input type="radio" name="selectedPlan" value="3-Day Trial" checked onchange="updateSelectedPlanDetails('3-Day Trial', 199)">
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.95rem;">
+                      3-Day Taste Trial <span class="save-badge" style="font-size: 0.65rem;">Special ₹199</span>
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">3 fresh bowls • ₹66/day (<s>₹280</s>)</div>
+                  </div>
+                </div>
+                <div style="font-weight: 800; color: var(--primary-green-dark); font-size: 1.15rem;">₹199</div>
+              </label>
+
+              <!-- 7 Days Plan -->
+              <label class="plan-radio-card" id="planCardWeekly">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <input type="radio" name="selectedPlan" value="7-Day Plan" onchange="updateSelectedPlanDetails('7-Day Plan', 649)">
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.95rem;">7 Days Plan</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">7 fresh morning bowls • ₹92/day</div>
+                  </div>
+                </div>
+                <div style="font-weight: 800; color: var(--primary-green-dark); font-size: 1.15rem;">₹649</div>
+              </label>
+
+              <!-- 30 Days Plan -->
+              <label class="plan-radio-card" id="planCardMonthly">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <input type="radio" name="selectedPlan" value="30-Day Plan" onchange="updateSelectedPlanDetails('30-Day Plan', 2699)">
+                  <div>
+                    <div style="font-weight: 700; font-size: 0.95rem;">30 Days Plan (Best Value)</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">30 fresh morning bowls • ₹90/day</div>
+                  </div>
+                </div>
+                <div style="font-weight: 800; color: var(--primary-green-dark); font-size: 1.15rem;">₹2,699</div>
+              </label>
+            </div>
+
+            <div class="modal-footer">
+              <div></div>
+              <button type="button" class="btn btn-primary" onclick="goToWizardStep(2)">
+                Continue to Delivery Info <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Address & Morning Slot -->
+          <div class="wizard-tab-content" id="wizardStep2">
+            <h4 style="font-size: 1rem; margin-bottom: 14px;">2. Morning Delivery Details</h4>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Your Full Name *</label>
+                <input type="text" class="form-input" id="custName" placeholder="e.g. Rahul Sharma" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone / WhatsApp Number *</label>
+                <input type="tel" class="form-input" id="custPhone" placeholder="e.g. 9480020516" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Complete Doorstep Address *</label>
+              <input type="text" class="form-input" id="custAddress" placeholder="Flat / House No, Apartment Name, Street Name" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Pincode / Locality *</label>
+                <input type="text" class="form-input" id="custPincode" placeholder="e.g. 560100 (Electronic City)" maxlength="6" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Morning Delivery Slot *</label>
+                <select class="form-select" id="custSlot">
+                  <option value="7:00 AM – 8:00 AM (Early Morning)" selected>7:00 AM – 8:00 AM (Early Morning)</option>
+                  <option value="8:00 AM – 9:00 AM (Standard)">8:00 AM – 9:00 AM (Standard)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">First Delivery Start Date *</label>
+              <input type="date" class="form-input" id="custStartDate" required>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="goToWizardStep(1)">
+                <i class="fa-solid fa-arrow-left"></i> Back
+              </button>
+              <button type="button" class="btn btn-primary" onclick="validateStep2AndProceed()">
+                Proceed to Payment <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 3: QR Payment & Screenshot Upload -->
+          <div class="wizard-tab-content" id="wizardStep3">
+            <h4 style="font-size: 1rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+              <span>3. QR Payment & Proof Upload</span>
+              <span class="save-badge" style="font-size: 0.7rem;">Direct UPI</span>
+            </h4>
+            
+            <div class="order-summary-box">
+              <div class="summary-row">
+                <span id="sumPlanName">3-Day Taste Trial (3 Days)</span>
+                <span id="sumPlanPrice">₹199</span>
+              </div>
+              <div class="summary-row">
+                <span>Morning Doorstep Delivery (7 AM – 9 AM)</span>
+                <span style="color: var(--primary-green); font-weight: 700;">FREE</span>
+              </div>
+              <div class="summary-row">
+                <span>Hygienically Packed & Freshly Cut</span>
+                <span style="color: var(--primary-green); font-weight: 700;">INCLUDED</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total Amount to Pay</span>
+                <span style="color: var(--primary-green-dark);" id="sumTotalAmount">₹199</span>
+              </div>
+            </div>
+
+            <!-- Dedicated QR Payment Card -->
+            <div class="upi-payment-box">
+              <div class="upi-box-header">
+                <i class="fa-solid fa-qrcode" style="color: var(--primary-green);"></i>
+                <span>Scan QR Code with any UPI App (GPay, PhonePe, Paytm, Cred)</span>
+              </div>
+
+              <!-- Dynamic QR Code Container -->
+              <div class="upi-qr-display-wrap">
+                <div class="upi-qr-frame">
+                  <img id="upiQrCodeImg" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=upi%3A%2F%2Fpay%3Fpa%3D9980350691%40ptyes%26pn%3DFruit%2520Routine%26am%3D199%26cu%3DINR" alt="Fruit Routine UPI QR Code" class="dynamic-upi-qr">
+                </div>
+                <div class="upi-scan-instruction">
+                  <span class="upi-amount-pill">Pay <strong id="qrAmountTag">₹199</strong></span>
+                  <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Merchant: Fruit Routine</div>
+                </div>
+              </div>
+
+              <!-- UPI ID with Copy Button -->
+              <div class="upi-id-copy-container">
+                <div class="upi-id-label">UPI ID:</div>
+                <div class="upi-id-val-wrap">
+                  <input type="text" id="upiIdValue" value="9980350691@ptyes" readonly class="upi-id-input">
+                  <button type="button" class="btn-copy-upi" id="copyUpiBtn" onclick="copyUpiIdToClipboard()">
+                    <i class="fa-regular fa-copy" id="copyIcon"></i>
+                    <span id="copyBtnText">Copy</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Mobile Quick Pay Link -->
+              <div class="mobile-pay-deep-link">
+                <a id="directUpiDeepLink" href="upi://pay?pa=9980350691@ptyes&pn=Fruit%20Routine&am=199&cu=INR" class="btn-direct-upi">
+                  <i class="fa-solid fa-mobile-screen-button"></i> Pay via UPI App (GPay / PhonePe / Paytm)
+                </a>
+              </div>
+            </div>
+
+            <!-- Mandatory Screenshot Attachment Box -->
+            <div class="payment-upload-card">
+              <label class="form-label" style="display: flex; align-items: center; justify-content: space-between;">
+                <span><i class="fa-solid fa-cloud-arrow-up" style="color: var(--primary-green);"></i> Attach Payment Screenshot *</span>
+                <span style="font-size: 0.75rem; color: #D32F2F; font-weight: 600;">Required</span>
+              </label>
+              
+              <div class="upload-dropzone" id="uploadDropzone" onclick="document.getElementById('paymentScreenshotInput').click()">
+                <input type="file" id="paymentScreenshotInput" accept="image/*" style="display: none;" onchange="handleScreenshotUpload(event)">
+                <div id="dropzoneEmptyState">
+                  <div class="upload-icon-circle">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
+                  <div style="font-weight: 700; font-size: 0.9rem; margin-bottom: 2px;">Click to upload screenshot</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">PNG, JPG, JPEG or Mobile Screenshot</div>
+                </div>
+                <div id="dropzonePreviewState" style="display: none; align-items: center; gap: 12px; justify-content: center;">
+                  <img id="screenshotThumbnail" src="" alt="Proof Preview" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid var(--accent-green);">
+                  <div style="text-align: left;">
+                    <div id="uploadedFileName" style="font-weight: 700; font-size: 0.85rem; color: var(--primary-green-dark);">screenshot.jpg</div>
+                    <div style="font-size: 0.75rem; color: var(--primary-green);"><i class="fa-solid fa-circle-check"></i> Screenshot Attached</div>
+                  </div>
+                  <button type="button" class="btn-remove-upload" onclick="event.stopPropagation(); removeScreenshotUpload();" title="Remove attachment">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Optional UTR Number -->
+              <div class="form-group" style="margin-top: 12px; margin-bottom: 0;">
+                <input type="text" class="form-input" id="upiUtrNumber" placeholder="Optional: UPI Ref / UTR No. (12-digit number)" style="font-size: 0.86rem; padding: 9px 14px;">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" onclick="goToWizardStep(2)">
+                <i class="fa-solid fa-arrow-left"></i> Back
+              </button>
+              <button type="button" class="btn btn-cta btn-lg" onclick="executeMockPayment()">
+                <i class="fa-solid fa-circle-check"></i> Submit Order & Confirm Payment
+              </button>
+            </div>
+          </div>
+
+          <!-- SUCCESS STATE -->
+          <div class="wizard-tab-content" id="wizardStepSuccess">
+            <div class="order-success-state">
+              <div class="success-check-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary-green-dark); margin-bottom: 6px;">Subscription Received!</h3>
+              <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+                Thank you! Your order has been placed. Please click below to send your payment screenshot directly to our WhatsApp operations team.
+              </p>
+              
+              <div style="background: var(--bg-section-light); border-radius: 12px; padding: 18px; text-align: left; border: 1px solid var(--accent-green); margin-bottom: 24px; font-size: 0.88rem;">
+                <div style="margin-bottom: 6px;"><strong>Order ID:</strong> <span id="confirmedOrderId">FR-84920</span></div>
+                <div style="margin-bottom: 6px;"><strong>Plan:</strong> <span id="confirmedPlanName">3-Day Trial (₹199)</span></div>
+                <div style="margin-bottom: 6px;"><strong>First Delivery:</strong> <span id="confirmedStartDate">Tomorrow, between 7:00 AM – 9:00 AM</span></div>
+                <div style="margin-bottom: 6px;"><strong>Deliver to:</strong> <span id="confirmedAddress">Bengaluru</span></div>
+                <div><strong>Paid via UPI to:</strong> <code>9980350691@ptyes</code></div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a id="whatsappConfirmBtn" href="https://wa.me/919480020516" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="justify-content: center; width: 100%;">
+                  <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Send Payment Screenshot on WhatsApp
+                </a>
+                <button type="button" class="btn btn-outline" onclick="closeSubscriptionModal(); window.location.href='#dashboard';">
+                  Go to Subscriber Dashboard Demo
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL 2: BULK ORDER INQUIRY MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="bulkOrderModal" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="assets/logo.png" alt="Fruit Routine" style="height: 46px; border-radius: 6px;">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700;">Fruit Routine Bulk Orders</h3>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Offices, Home Functions & All Occasions in Bangalore</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeBulkOrderModal()" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="bulkInquiryForm" onsubmit="handleBulkInquirySubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Your Name / Company Name *</label>
+              <input type="text" class="form-input" id="bulkName" placeholder="e.g. Rajesh / Infosys HR" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone / WhatsApp Number *</label>
+              <input type="tel" class="form-input" id="bulkPhone" placeholder="e.g. 9480020516" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Occasion Type *</label>
+              <select class="form-select" id="bulkOccasion">
+                <option value="Office Function / Seminar">Office Function / Meeting / Seminar</option>
+                <option value="Home Function / Pooja / Party">Home Function / Pooja / Get-together</option>
+                <option value="Birthday / Anniversary">Birthday / Anniversary / Celebration</option>
+                <option value="Corporate Breakfast Catering">Corporate Daily Breakfast Catering</option>
+                <option value="Other Occasion">Other Occasion</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Approximate Number of Bowls *</label>
+              <input type="number" class="form-input" id="bulkQuantity" placeholder="e.g. 50" min="10" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Event Date *</label>
+              <input type="date" class="form-input" id="bulkDate" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Delivery Locality in Bangalore *</label>
+              <input type="text" class="form-input" id="bulkLocation" placeholder="e.g. Electronic City / Koramangala" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Specific Customizations / Notes (Optional)</label>
+            <textarea class="form-textarea" id="bulkNotes" rows="2" placeholder="e.g. Delivery needed by 8:00 AM with spoons and napkins"></textarea>
+          </div>
+
+          <div style="background: var(--bg-section-light); border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; font-size: 0.85rem; border: 1px solid var(--accent-green); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <strong><i class="fa-solid fa-phone"></i> Immediate Assistance?</strong><br>
+              <span style="color: var(--text-muted);">Call or WhatsApp directly:</span>
+            </div>
+            <a href="https://wa.me/919480020516?text=Hi%20Fruit%20Routine!%20I%20need%20a%20bulk%20order%20quote." target="_blank" rel="noopener" class="btn btn-cta btn-sm">
+              <i class="fa-brands fa-whatsapp"></i> Chat 9480020516
+            </a>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeBulkOrderModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-paper-plane"></i> Submit Bulk Inquiry
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

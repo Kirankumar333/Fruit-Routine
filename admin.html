@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Fruit Routine Bangalore</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background-color: #F3F4F6;
+      font-family: var(--font-body);
+      color: var(--text-main);
+    }
+    .admin-navbar {
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--border-green);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+    .admin-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .admin-logo-wrap img {
+      height: 48px;
+    }
+    .admin-badge {
+      background: var(--primary-green-dark);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.5px;
+    }
+    .admin-main {
+      max-width: 1280px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .stat-val {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary-green-dark);
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .stat-icon.green { background: #E8F5E9; color: var(--primary-green); }
+    .stat-icon.orange { background: #FFF3E0; color: var(--cta-orange); }
+    .stat-icon.blue { background: #E0F2FE; color: #0284C7; }
+    .stat-icon.purple { background: #F3E8FF; color: #9333EA; }
+
+    .admin-table-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+    }
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .search-input {
+      padding: 10px 16px;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      width: 280px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--primary-green);
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .admin-table th {
+      background: #FAFAFA;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border-light);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .admin-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+    }
+    .admin-table tr:hover {
+      background-color: #F9FAFB;
+    }
+    .order-id-tag {
+      font-family: monospace;
+      font-weight: 800;
+      color: var(--primary-green-dark);
+      background: var(--bg-section-light);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .status-badge.new { background: #FEF3C7; color: #B45309; }
+    .status-badge.confirmed { background: #DCFCE7; color: #15803D; }
+    .status-badge.dispatched { background: #DBEAFE; color: #1D4ED8; }
+
+    .action-btn-group {
+      display: flex;
+      gap: 6px;
+    }
+    .tbl-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+      background: #FFFFFF;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+    .tbl-btn:hover {
+      border-color: var(--primary-green);
+      color: var(--primary-green);
+      background: var(--bg-section-light);
+    }
+    .tbl-btn.wa {
+      background: #25D366;
+      color: #FFFFFF;
+      border-color: #25D366;
+    }
+    .tbl-btn.wa:hover {
+      background: #128C7E;
+      color: #FFFFFF;
+    }
+    .screenshot-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 1.5px solid var(--accent-green);
+      transition: transform 0.2s;
+    }
+    .screenshot-thumb:hover {
+      transform: scale(1.15);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="admin-navbar">
+    <div class="admin-logo-wrap">
+      <img src="assets/logo.png" alt="Fruit Routine Logo">
+      <div>
+        <div style="font-weight: 800; font-size: 1.05rem; color: var(--primary-green-dark);">Fruit Routine Operations</div>
+        <div style="font-size: 0.72rem; color: var(--text-muted);">Admin & Delivery Order Management</div>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <button class="btn btn-secondary btn-sm" onclick="openAutomationModal()" style="font-weight: 700;">
+        <i class="fa-solid fa-bolt" style="color: var(--cta-orange);"></i> Cloud Automations
+      </button>
+      <span class="admin-badge"><i class="fa-solid fa-shield-halved"></i> ADMIN LIVE</span>
+      <a href="index.html" class="btn btn-outline btn-sm" style="text-decoration: none;">
+        <i class="fa-solid fa-arrow-left"></i> View Live Website
+      </a>
+    </div>
+  </header>
+
+  <!-- Automation Settings Modal -->
+  <div class="modal-overlay" id="automationModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #FFFFFF; border-radius: 16px; max-width: 580px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); border: 2px solid var(--border-green);">
+      <div style="padding: 20px 24px; background: var(--bg-section-light); border-bottom: 1px solid var(--border-green); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-bolt" style="color: var(--cta-orange); font-size: 1.4rem;"></i>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--primary-green-dark); margin: 0;">Automated Integrations</h3>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Sync orders to Google Sheets & receive Telegram push alerts</span>
+          </div>
+        </div>
+        <button onclick="closeAutomationModal()" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted);">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div style="padding: 24px;">
+        <!-- 1. Google Sheets Integration -->
+        <div style="background: #FAFAFA; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; margin-bottom: 18px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <i class="fa-solid fa-table" style="color: #107C41; font-size: 1.1rem;"></i>
+            <strong style="font-size: 0.95rem;">1. Google Sheets Live Webhook</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">
+            Every customer order automatically adds a row to your Google Sheet using Google Apps Script (provided in <code>google_sheets_automation.gs</code>).
+          </p>
+          <input type="url" id="cfgSheetsWebhook" class="form-input" placeholder="Paste Google Apps Script Web App URL (https://script.google.com/...)" style="font-size: 0.85rem; margin-bottom: 10px;">
+        </div>
+
+        <!-- 2. Telegram Push Notification -->
+        <div style="background: #FAFAFA; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <i class="fa-brands fa-telegram" style="color: #229ED9; font-size: 1.1rem;"></i>
+            <strong style="font-size: 0.95rem;">2. Telegram Push Alert (Optional)</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">
+            Get instant sound notifications on your phone via Telegram bot for every new subscription.
+          </p>
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px;">
+            <input type="text" id="cfgTgToken" class="form-input" placeholder="Bot Token (e.g. 123456:ABC...)" style="font-size: 0.85rem;">
+            <input type="text" id="cfgTgChat" class="form-input" placeholder="Chat ID (e.g. 987654321)" style="font-size: 0.85rem;">
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="testAutomations()">
+            <i class="fa-solid fa-paper-plane"></i> Send Test Webhook
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveAutomationSettings()">
+            <i class="fa-solid fa-floppy-disk"></i> Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="admin-main">
+    <!-- Quick Stats -->
+    <div class="admin-stats-grid">
+      <div class="stat-card">
+        <div>
+          <div class="stat-val" id="statTotalOrders">0</div>
+          <div class="stat-label">Total Subscriptions Placed</div>
+        </div>
+        <div class="stat-icon green">
+          <i class="fa-solid fa-boxes-packing"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-val" id="statTrialOrders">0</div>
+          <div class="stat-label">3-Day Trials (₹199)</div>
+        </div>
+        <div class="stat-icon orange">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-val" id="statTotalRevenue">₹0</div>
+          <div class="stat-label">Total Revenue Generated</div>
+        </div>
+        <div class="stat-icon blue">
+          <i class="fa-solid fa-indian-rupee-sign"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <div class="stat-val" id="statPendingVerification">0</div>
+          <div class="stat-label">Pending Verifications</div>
+        </div>
+        <div class="stat-icon purple">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Orders Table -->
+    <div class="admin-table-card">
+      <div class="table-toolbar">
+        <div>
+          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px;">Live Customer Orders</h2>
+          <p style="font-size: 0.82rem; color: var(--text-muted);">Real-time customer subscriptions, delivery slots, and payment screenshots</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <input type="text" id="orderSearchInput" class="search-input" placeholder="Search by name, phone, pincode..." oninput="filterOrdersTable()">
+          <button class="btn btn-secondary btn-sm" onclick="exportOrdersToCSV()">
+            <i class="fa-solid fa-file-excel"></i> Export Delivery Sheet (CSV)
+          </button>
+          <button class="btn btn-outline btn-sm" onclick="seedSampleOrders()">
+            <i class="fa-solid fa-plus"></i> Add Test Order
+          </button>
+        </div>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="admin-table" id="adminOrdersTable">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Plan & Amount</th>
+              <th>Delivery Address & PIN</th>
+              <th>Start Date (7-9 AM)</th>
+              <th>Payment Proof</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAndRenderOrders();
+    });
+
+    function getOrders() {
+      const stored = localStorage.getItem('fruit_routine_orders');
+      if (stored) {
+        try { return JSON.parse(stored); } catch(e) { return []; }
+      }
+      return [];
+    }
+
+    function saveOrders(orders) {
+      localStorage.setItem('fruit_routine_orders', JSON.stringify(orders));
+    }
+
+    function loadAndRenderOrders() {
+      let orders = getOrders();
+      if (orders.length === 0) {
+        // Seed default sample order so table is never empty on first load
+        orders = [
+          {
+            orderId: 'FR-98214',
+            name: 'Priya Sharma',
+            phone: '9845012345',
+            address: 'Flat 302, Shriram Summit, Electronic City Phase 1',
+            pincode: '560100',
+            plan: '3-Day Trial',
+            amount: 199,
+            startDate: 'Tomorrow, 7:00 AM',
+            utr: '427189034521',
+            screenshot: 'assets/fruit-bowl-fresh.jpg',
+            status: 'Confirmed',
+            timestamp: new Date().toLocaleString()
+          }
+        ];
+        saveOrders(orders);
+      }
+
+      renderTable(orders);
+      updateStats(orders);
+    }
+
+    function renderTable(orders) {
+      const tbody = document.getElementById('ordersTableBody');
+      if (orders.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--text-muted);">No orders placed yet. Orders placed via the website will appear here in real-time!</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = orders.map((o, idx) => `
+        <tr>
+          <td><span class="order-id-tag">${o.orderId}</span><br><small style="color: #9CA3AF; font-size: 0.72rem;">${o.timestamp || 'Recent'}</small></td>
+          <td>
+            <strong>${o.name}</strong><br>
+            <a href="tel:${o.phone}" style="color: var(--primary-green); font-weight: 600; text-decoration: none;">
+              <i class="fa-solid fa-phone" style="font-size: 0.75rem;"></i> ${o.phone}
+            </a>
+          </td>
+          <td>
+            <strong>${o.plan}</strong><br>
+            <span style="color: var(--primary-green-dark); font-weight: 800;">₹${o.amount}</span>
+          </td>
+          <td style="max-width: 240px;">
+            <div>${o.address}</div>
+            <span style="font-size: 0.75rem; background: #E5E7EB; padding: 2px 6px; border-radius: 4px; font-weight: 700;">PIN: ${o.pincode}</span>
+          </td>
+          <td><strong>${o.startDate}</strong></td>
+          <td>
+            ${o.screenshot ? `
+              <img src="${o.screenshot}" alt="Payment Proof" class="screenshot-thumb" onclick="window.open('${o.screenshot}', '_blank')" title="Click to view full image">
+              ${o.utr ? `<br><small style="font-size: 0.72rem; color: #6B7280;">UTR: ${o.utr}</small>` : ''}
+            ` : (o.utr ? `<span style="font-size: 0.8rem; font-family: monospace;">UTR: ${o.utr}</span>` : '<span style="color: #EF4444; font-size: 0.78rem;">Pending Screenshot</span>')}
+          </td>
+          <td>
+            <select onchange="updateOrderStatus(${idx}, this.value)" style="padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-light); font-size: 0.78rem; font-weight: 700; background: ${o.status === 'Confirmed' ? '#DCFCE7' : o.status === 'Dispatched' ? '#DBEAFE' : '#FEF3C7'};">
+              <option value="New Order" ${o.status === 'New Order' ? 'selected' : ''}>⏳ New Order</option>
+              <option value="Confirmed" ${o.status === 'Confirmed' ? 'selected' : ''}>✅ Payment Confirmed</option>
+              <option value="Dispatched" ${o.status === 'Dispatched' ? 'selected' : ''}>🚚 Dispatched (7 AM)</option>
+              <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>🎉 Delivered</option>
+            </select>
+          </td>
+          <td>
+            <div class="action-btn-group">
+              <a href="https://wa.me/91${o.phone.replace(/[^0-9]/g, '')}?text=Hi%20${encodeURIComponent(o.name)}!%20Fruit%20Routine%20here%20regarding%20your%20morning%20fruit%20bowl%20order%20(${o.orderId})." target="_blank" class="tbl-btn wa" title="Chat on WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i> Chat
+              </a>
+              <button class="tbl-btn" onclick="deleteOrder(${idx})" title="Delete order" style="color: #DC2626;">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function updateStats(orders) {
+      document.getElementById('statTotalOrders').innerText = orders.length;
+      document.getElementById('statTrialOrders').innerText = orders.filter(o => o.plan.includes('Trial')).length;
+      const totalRev = orders.reduce((sum, o) => sum + (Number(o.amount) || 0), 0);
+      document.getElementById('statTotalRevenue').innerText = `₹${totalRev.toLocaleString('en-IN')}`;
+      document.getElementById('statPendingVerification').innerText = orders.filter(o => o.status === 'New Order').length;
+    }
+
+    function updateOrderStatus(index, newStatus) {
+      const orders = getOrders();
+      if (orders[index]) {
+        orders[index].status = newStatus;
+        saveOrders(orders);
+        loadAndRenderOrders();
+      }
+    }
+
+    function deleteOrder(index) {
+      if (confirm('Are you sure you want to delete this order?')) {
+        const orders = getOrders();
+        orders.splice(index, 1);
+        saveOrders(orders);
+        loadAndRenderOrders();
+      }
+    }
+
+    function filterOrdersTable() {
+      const query = document.getElementById('orderSearchInput').value.toLowerCase();
+      const orders = getOrders();
+      const filtered = orders.filter(o => 
+        o.name.toLowerCase().includes(query) ||
+        o.phone.includes(query) ||
+        o.pincode.includes(query) ||
+        o.orderId.toLowerCase().includes(query) ||
+        o.address.toLowerCase().includes(query)
+      );
+      renderTable(filtered);
+    }
+
+    function seedSampleOrders() {
+      const orders = getOrders();
+      const sampleNames = ['Kavita Rao', 'Arjun Nambiar', 'Rahul Verma', 'Sneha Reddy'];
+      const samplePincodes = ['560100', '560099', '560102', '560066'];
+      const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+      const randomPin = samplePincodes[Math.floor(Math.random() * samplePincodes.length)];
+      
+      orders.unshift({
+        orderId: 'FR-' + Math.floor(10000 + Math.random() * 90000),
+        name: randomName,
+        phone: '98' + Math.floor(10000000 + Math.random() * 90000000),
+        address: `Flat ${Math.floor(100 + Math.random() * 900)}, Green Glen, Bangalore`,
+        pincode: randomPin,
+        plan: '3-Day Trial',
+        amount: 199,
+        startDate: 'Tomorrow, 7:00 AM',
+        utr: '' + Math.floor(100000000000 + Math.random() * 900000000000),
+        screenshot: 'assets/fruit-bowl-fresh.jpg',
+        status: 'New Order',
+        timestamp: new Date().toLocaleString()
+      });
+
+      saveOrders(orders);
+      loadAndRenderOrders();
+    }
+
+    function exportOrdersToCSV() {
+      const orders = getOrders();
+      if (orders.length === 0) {
+        alert('No orders to export.');
+        return;
+      }
+
+      let csv = 'Order ID,Customer Name,Phone,Plan,Amount,Address,Pincode,Start Date,UTR Number,Status,Timestamp\n';
+      orders.forEach(o => {
+        csv += `"${o.orderId}","${o.name}","${o.phone}","${o.plan}","${o.amount}","${o.address.replace(/"/g, '""')}","${o.pincode}","${o.startDate}","${o.utr || ''}","${o.status}","${o.timestamp}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Fruit_Routine_Deliveries_${new Date().toISOString().slice(0,10)}.csv`;
+      link.click();
+    }
+
+    /* Automation Modal Handlers */
+    function openAutomationModal() {
+      document.getElementById('cfgSheetsWebhook').value = localStorage.getItem('fruit_routine_sheets_webhook') || '';
+      document.getElementById('cfgTgToken').value = localStorage.getItem('fruit_routine_tg_token') || '';
+      document.getElementById('cfgTgChat').value = localStorage.getItem('fruit_routine_tg_chat') || '';
+      document.getElementById('automationModal').style.display = 'flex';
+    }
+
+    function closeAutomationModal() {
+      document.getElementById('automationModal').style.display = 'none';
+    }
+
+    function saveAutomationSettings() {
+      const sheetsUrl = document.getElementById('cfgSheetsWebhook').value.trim();
+      const tgToken = document.getElementById('cfgTgToken').value.trim();
+      const tgChat = document.getElementById('cfgTgChat').value.trim();
+
+      localStorage.setItem('fruit_routine_sheets_webhook', sheetsUrl);
+      localStorage.setItem('fruit_routine_tg_token', tgToken);
+      localStorage.setItem('fruit_routine_tg_chat', tgChat);
+
+      alert('Automation settings saved! New customer orders will now trigger your configured webhooks.');
+      closeAutomationModal();
+    }
+
+    function testAutomations() {
+      const sheetsUrl = document.getElementById('cfgSheetsWebhook').value.trim();
+      const tgToken = document.getElementById('cfgTgToken').value.trim();
+      const tgChat = document.getElementById('cfgTgChat').value.trim();
+
+      if (!sheetsUrl && (!tgToken || !tgChat)) {
+        alert('Please enter at least a Google Sheets Webhook URL or Telegram Bot credentials to test.');
+        return;
+      }
+
+      const samplePayload = {
+        orderId: 'TEST-999',
+        name: 'Test Customer',
+        phone: '9480020516',
+        address: 'Electronic City Phase 1, Bangalore',
+        pincode: '560100',
+        plan: '3-Day Trial (Test)',
+        amount: 199,
+        startDate: 'Tomorrow, 7:00 AM',
+        utr: 'TEST12345678',
+        status: 'New Order',
+        timestamp: new Date().toLocaleString('en-IN')
+      };
+
+      let count = 0;
+      if (sheetsUrl) {
+        fetch(sheetsUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(samplePayload)
+        }).then(() => count++);
+      }
+
+      if (tgToken && tgChat) {
+        const text = encodeURIComponent(`🍓 *TEST ALERT from Fruit Routine Operations!*\nAutomated notifications are working properly.`);
+        fetch(`https://api.telegram.org/bot${tgToken}/sendMessage?chat_id=${tgChat}&text=${text}&parse_mode=Markdown`)
+          .then(() => count++);
+      }
+
+      alert('Test webhook dispatched! Check your Google Sheet or Telegram.');
+    }
+  </script>
+</body>
+</html>
