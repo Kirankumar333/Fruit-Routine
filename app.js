@@ -428,14 +428,15 @@ function executeMockPayment() {
 /* Automated Cloud Webhook Dispatcher */
 function dispatchAutomatedIntegrations(order) {
   // 1. Google Sheets Sync
-  const sheetsWebhook = localStorage.getItem('fruit_routine_sheets_webhook');
+  const defaultSheetsWebhook = 'https://script.google.com/macros/s/AKfycbwx5dwP7mI57PeyrubJlmlYe8WnDKOLy0ntOslaIdET-5Q0SR7N9sP576_D2lq-UpSt/exec';
+  const sheetsWebhook = localStorage.getItem('fruit_routine_sheets_webhook') || defaultSheetsWebhook;
   if (sheetsWebhook && sheetsWebhook.startsWith('http')) {
     fetch(sheetsWebhook, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(order)
-    }).catch(e => console.log('Google Sheets sync attempted'));
+    }).catch(e => console.log('Google Sheets sync dispatched'));
   }
 
   // 2. Telegram Bot Instant Notification

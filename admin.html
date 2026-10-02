@@ -547,8 +547,10 @@
     }
 
     /* Automation Modal Handlers */
+    const defaultWebhookUrl = 'https://script.google.com/macros/s/AKfycbwx5dwP7mI57PeyrubJlmlYe8WnDKOLy0ntOslaIdET-5Q0SR7N9sP576_D2lq-UpSt/exec';
+
     function openAutomationModal() {
-      document.getElementById('cfgSheetsWebhook').value = localStorage.getItem('fruit_routine_sheets_webhook') || '';
+      document.getElementById('cfgSheetsWebhook').value = localStorage.getItem('fruit_routine_sheets_webhook') || defaultWebhookUrl;
       document.getElementById('cfgTgToken').value = localStorage.getItem('fruit_routine_tg_token') || '';
       document.getElementById('cfgTgChat').value = localStorage.getItem('fruit_routine_tg_chat') || '';
       document.getElementById('automationModal').classList.add('active');
