@@ -226,9 +226,9 @@
   </header>
 
   <!-- Automation Settings Modal -->
-  <div class="modal-overlay" id="automationModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #FFFFFF; border-radius: 16px; max-width: 580px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl); border: 2px solid var(--border-green);">
-      <div style="padding: 20px 24px; background: var(--bg-section-light); border-bottom: 1px solid var(--border-green); display: flex; align-items: center; justify-content: space-between;">
+  <div class="modal-overlay" id="automationModal">
+    <div class="modal-card" style="max-width: 580px;">
+      <div class="modal-header">
         <div style="display: flex; align-items: center; gap: 10px;">
           <i class="fa-solid fa-bolt" style="color: var(--cta-orange); font-size: 1.4rem;"></i>
           <div>
@@ -236,12 +236,12 @@
             <span style="font-size: 0.78rem; color: var(--text-muted);">Sync orders to Google Sheets & receive Telegram push alerts</span>
           </div>
         </div>
-        <button onclick="closeAutomationModal()" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted);">
+        <button class="modal-close-btn" onclick="closeAutomationModal()" aria-label="Close modal">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <div style="padding: 24px;">
+      <div class="modal-body" style="padding: 24px;">
         <!-- 1. Google Sheets Integration -->
         <div style="background: #FAFAFA; border: 1px solid var(--border-light); border-radius: 12px; padding: 18px; margin-bottom: 18px;">
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
@@ -249,7 +249,7 @@
             <strong style="font-size: 0.95rem;">1. Google Sheets Live Webhook</strong>
           </div>
           <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">
-            Every customer order automatically adds a row to your Google Sheet using Google Apps Script (provided in <code>google_sheets_automation.gs</code>).
+            Every customer order automatically adds a row to your Google Sheet and saves the screenshot to Google Drive using Google Apps Script (provided in <code>google_sheets_automation.gs</code>).
           </p>
           <input type="url" id="cfgSheetsWebhook" class="form-input" placeholder="Paste Google Apps Script Web App URL (https://script.google.com/...)" style="font-size: 0.85rem; margin-bottom: 10px;">
         </div>
@@ -551,11 +551,11 @@
       document.getElementById('cfgSheetsWebhook').value = localStorage.getItem('fruit_routine_sheets_webhook') || '';
       document.getElementById('cfgTgToken').value = localStorage.getItem('fruit_routine_tg_token') || '';
       document.getElementById('cfgTgChat').value = localStorage.getItem('fruit_routine_tg_chat') || '';
-      document.getElementById('automationModal').style.display = 'flex';
+      document.getElementById('automationModal').classList.add('active');
     }
 
     function closeAutomationModal() {
-      document.getElementById('automationModal').style.display = 'none';
+      document.getElementById('automationModal').classList.remove('active');
     }
 
     function saveAutomationSettings() {
